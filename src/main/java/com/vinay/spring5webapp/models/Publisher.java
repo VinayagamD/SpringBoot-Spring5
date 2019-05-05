@@ -3,16 +3,20 @@ package com.vinay.spring5webapp.models;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-public class Publisher {
+public class Publisher implements Serializable {
+
+    private static final long serialVersionUID = 3801281035462579847L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
+    private String address;
 
     @OneToOne
     @Cascade(CascadeType.ALL)
@@ -21,12 +25,14 @@ public class Publisher {
     public Publisher() {
     }
 
-    public Publisher(String name) {
+    public Publisher(String name,String address) {
         this.name = name;
+        this.address = address;
     }
 
-    public Publisher(String name, Book book) {
+    public Publisher(String name, String address ,Book book) {
         this.name = name;
+        this.address = address;
         this.book = book;
     }
 
@@ -45,6 +51,14 @@ public class Publisher {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Book getBook() {
