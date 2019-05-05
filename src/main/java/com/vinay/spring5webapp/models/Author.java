@@ -1,5 +1,7 @@
 package com.vinay.spring5webapp.models;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -16,6 +18,7 @@ public class Author implements Serializable {
     private String firstName;
     private String lastName;
     @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
     inverseJoinColumns =  @JoinColumn(name="author_id"))
     private Set<Book> books = new HashSet<>();
